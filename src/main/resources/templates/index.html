@@ -1,23 +1,40 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8" />
-    <title></title>
+    <title>socket.html</title>
+
+    <meta name="keywords" content="keyword1,keyword2,keyword3">
+    <meta name="description" content="this is my page">
+    <meta name="content-type" content="text/html" charset="UTF-8">
+    <!--<link rel="stylesheet" type="text/css" href="./styles.css">-->
+
 </head>
+
 <body>
-<input id="text" type="text" />
-<button onclick="send()">Send</button>
-<button onclick="closeWebSocket()">Close</button>
+
+Welcome<br/>
+<input id="text" type="text" /><button onclick="send()">Send</button>    <button onclick="closeWebSocket()">Close</button>
 <div id="message">
 </div>
-<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-<script>
+<!-- 公共JS -->
+    <script type="text/javascript" src="../webSocket/jquery.min.js"></script>
+
+
+<script type="text/javascript">
     var userID="888";
     var websocket=null;
+    $(function() {
 
-    $(function(){
+        //创建WebSocket
         connectWebSocket();
     })
+
+    //强制关闭浏览器  调用websocket.close（）,进行正常关闭
+    window.onunload = function() {
+
+        //关闭连接
+        closeWebSocket();
+    }
 
     //建立WebSocket连接
     function connectWebSocket(){
@@ -42,8 +59,8 @@
         websocket.onmessage = function (msg) {
             console.log(msg.data);
         }
-
     }
+
     //发送消息
     function send(){
         var postValue={};
@@ -57,6 +74,7 @@
             websocket.close();
         }
     }
+
 </script>
 </body>
 </html>
